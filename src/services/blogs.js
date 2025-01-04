@@ -8,7 +8,7 @@ const getAll = () => {
 
 const addNewBlog = async (payload) => {
   try {
-    const response = await axios.poat(baseUrl, payload);
+    const response = await axios.post(baseUrl, payload);
     return {
       success: true,
       data: response.data,
