@@ -1,8 +1,7 @@
-import axios from "axios";
-const baseUrl = "/api/login";
+import axiosRequestInstance from "./request";
 
 const login = async (credentials) => {
-  const response = await axios.post(baseUrl, credentials);
+  const response = await axiosRequestInstance.post("/login", credentials);
   return response.data;
 };
 
