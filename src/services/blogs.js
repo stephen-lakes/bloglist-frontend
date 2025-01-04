@@ -2,9 +2,10 @@ import axios from "axios";
 import { getToken } from "../helpers/authUtils";
 const baseUrl = "/api/blogs";
 
-const getAll = () => {
+const getAll = async () => {
   const request = axios.get(baseUrl);
-  return request.then((response) => response.data);
+  const response = await request;
+  return response.data;
 };
 
 const addNewBlog = async (payload) => {
@@ -15,7 +16,9 @@ const addNewBlog = async (payload) => {
         Authorization: `Bearer ${token}`,
       },
     };
+    console.log("BEFORE =>>>");
     const response = await axios.post(baseUrl, payload, config);
+    console.log("AFTER =>>>");
     return {
       success: true,
       data: response.data,
