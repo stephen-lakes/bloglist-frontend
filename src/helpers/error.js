@@ -1,13 +1,16 @@
-const handleError = (result) => {
-  switch (result.status) {
+const handleError = (error) => {
+  switch (error.status) {
     case 404:
-      console.error("User Not Found");
+      console.error(`User Not Found`);
       break;
     case 401:
-      console.error("Invalid Login Credentials");
+      console.error(`Invalid Login Credentials`);
       break;
     default:
-      console.error("Login failed:", result.message);
+      console.error(
+        `Login failed\nAn error occurred during login:`,
+        error.message
+      );
   }
 };
 

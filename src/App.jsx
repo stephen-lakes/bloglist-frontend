@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
+import handleError from "./helpers/error";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -27,19 +28,20 @@ const App = () => {
 
     try {
       const credentials = { username, password };
-      const result = await loginService.login(credentials);
+      const response = await loginService.login(credentials);
 
-      if (result.success !== false) {
-        window.localStorage.setItem("loggedInBlogUser", JSON.stringify(result));
-        setUser(result);
+      if (response.success !== false) {
+        window.localStorage.setItem(
+          "loggedInBlogUser",
+          JSON.stringify(response)
+        );
+        setUser(response);
         setUsername("");
         setPassword("");
         console.log("Logged in successfully");
-      } else {
-        console.error("Login failed:", result.message);
-      }
+      } else handleError(response);
     } catch (error) {
-      console.error("An error occurred during login:", error);
+      handleError(error);
     }
   };
 

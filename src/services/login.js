@@ -17,6 +17,7 @@ const login = async (credentials) => {
       success: false,
       message: errorMessage,
       status: error.response?.status || 500,
+      text: error.response?.statusText
     };
   }
 };
