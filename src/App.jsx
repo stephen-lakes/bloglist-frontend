@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
 import blogService from "./services/blogs";
+import loginService from "./services/login";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -12,8 +13,28 @@ const App = () => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
 
-  const handleLogin = (e) => {
+  useEffect(() => {
+    const loggedInBlogUserJSON =
+      window.localStorage.getItem("loggedInBlogUser");
+    if (loggedInBlogUserJSON) {
+      const user = JSON.parse(loggedInBlogUserJSON);
+      setUser(user);
+    }
+  }, []);
+
+  const handleLogin = async (e) => {
     e.preventDefault();
+
+    try {
+      const user = await loginService.login({ username, password });
+      window.localStorage.setItem("loggedInBlogUser", JSON.stringify(user));
+
+      setUser(user);
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (user === null) {
@@ -44,6 +65,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      <p>{user.name} logged in</p>
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}
