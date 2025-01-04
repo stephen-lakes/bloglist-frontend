@@ -42,6 +42,7 @@ const App = () => {
 
     if (window.localStorage.getItem(key)) {
       window.localStorage.removeItem(key);
+      setUser(null);
       console.log("Logged out");
     }
   };
