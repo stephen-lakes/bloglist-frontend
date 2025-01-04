@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const login = (credentials) => {
-  const response = axioss.post(baseUrl, credentials);
+  const response = axios.post(baseUrl, credentials);
   return response.data;
 };
 
