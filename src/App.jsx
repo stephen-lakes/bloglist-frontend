@@ -22,7 +22,7 @@ const App = () => {
       window.localStorage.getItem("loggedInBlogUser");
     if (loggedInBlogUserJSON) {
       const user = JSON.parse(loggedInBlogUserJSON);
-      setUser(user.data);
+      setUser(user);
     }
   }, []);
 
@@ -36,7 +36,7 @@ const App = () => {
       if (response.success !== false) {
         window.localStorage.setItem(
           "loggedInBlogUser",
-          JSON.stringify(response)
+          JSON.stringify(response.data)
         );
         setUser(response.data);
         setUsername("");
@@ -58,14 +58,24 @@ const App = () => {
     }
   };
 
-  const addBlog = (event) => {
+  const addBlog = async (event) => {
     event.preventDefault();
-    blogService.addNewBlog({
-      title,
-      author,
-      url,
-      userId: user.id,
-    });
+    try {
+      const response = await blogService.addNewBlog({
+        title,
+        author,
+        url,
+        userId: user.id,
+      });
+      if (response.success !== false) {
+        setTitle("");
+        setAuthor("");
+        setUrl("");
+        console.log("Blog created successfully", response.data);
+      } else handleError(response);
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   if (user === null) {
