@@ -4,6 +4,19 @@ import blogService from "./services/blogs";
 import loginService from "./services/login";
 import handleError from "./helpers/error";
 
+const Notification = ({ message, type }) => {
+  if (message === null) {
+    return null;
+  }
+  return (
+    <>
+      <div className={`${type === "success" ? "success" : "error"}`}>
+        {message}
+      </div>
+    </>
+  );
+};
+
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [username, setUsername] = useState("");
@@ -12,6 +25,8 @@ const App = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [author, setAuthor] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -105,6 +120,9 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={errorMessage} type="error" />
+      <Notification message="Added successfully" type="success" />
+
       <h2>blogs</h2>
       <p>
         {user.name} logged in <button onClick={handleLogout}>logout</button>
