@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const baseUrl = "/api/login";
 
 const login = async (credentials) => {
@@ -6,17 +7,15 @@ const login = async (credentials) => {
     const response = await axios.post(baseUrl, credentials);
     return response.data;
   } catch (error) {
-    if (error.response && error.response.data)
-      return {
-        success: false,
-        message: error.response.data.message || "An unknown error occured",
-      };
-    else {
-      return {
-        success: false,
-        message: "Network error or server not responding",
-      };
-    }
+    const errorMessage =
+      error.response?.data?.message || "An unknown error occurred";
+
+    return {
+      success: false,
+      message: error.response
+        ? errorMessage
+        : "Network error or server not responding",
+    };
   }
 };
 
