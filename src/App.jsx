@@ -4,6 +4,8 @@ import blogService from "./services/blogs";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -16,10 +18,18 @@ const App = () => {
         <h2>log in to the application</h2>
         <form>
           Username:
-          <input type="test" name="" id="" />
+          <input
+            onChange={({ target }) => setUsername(target.value)}
+            type="text"
+            value={username}
+          />
           <br />
           Password:
-          <input type="password" name="" id="" />
+          <input
+            onChange={({ target }) => setPassword(target.value)}
+            type="password"
+            value={password}
+          />
           <br />
           <input type="submit" value="login" />
         </form>
