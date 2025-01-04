@@ -22,7 +22,7 @@ const App = () => {
       window.localStorage.getItem("loggedInBlogUser");
     if (loggedInBlogUserJSON) {
       const user = JSON.parse(loggedInBlogUserJSON);
-      setUser(user);
+      setUser(user.data);
     }
   }, []);
 
@@ -41,7 +41,7 @@ const App = () => {
         setUser(response.data);
         setUsername("");
         setPassword("");
-        console.log("Logged in successfully");
+        console.log("Logged in successfully", response.data);
       } else handleError(response);
     } catch (error) {
       handleError(error);
@@ -60,6 +60,12 @@ const App = () => {
 
   const addBlog = (event) => {
     event.preventDefault();
+    blogService.addNewBlog({
+      title,
+      author,
+      url,
+      userId: user.id,
+    });
   };
 
   if (user === null) {
@@ -93,6 +99,7 @@ const App = () => {
       <p>
         {user.name} logged in <button onClick={handleLogout}>logout</button>
       </p>
+      <p>user id {user.id}</p>
 
       <h2>create new</h2>
       <form onSubmit={addBlog}>
