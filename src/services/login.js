@@ -5,16 +5,18 @@ const baseUrl = "/api/login";
 const login = async (credentials) => {
   try {
     const response = await axios.post(baseUrl, credentials);
-    return response.data;
+    return {
+      success: true,
+      data: response.data,
+      status: response.status,
+    };
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || "An unknown error occurred";
-
     return {
       success: false,
-      message: error.response
-        ? errorMessage
-        : "Network error or server not responding",
+      message: errorMessage,
+      status: error.response?.status || 500,
     };
   }
 };
