@@ -9,6 +9,9 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [author, setAuthor] = useState("");
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -55,6 +58,10 @@ const App = () => {
     }
   };
 
+  const addBlog = (event) => {
+    event.preventDefault();
+  };
+
   if (user === null) {
     return (
       <div>
@@ -88,12 +95,33 @@ const App = () => {
       </p>
 
       <h2>create new</h2>
-      <form>
-        title: <input type="text" />
+      <form onSubmit={addBlog}>
+        title:
+        <input
+          type="text"
+          value={title}
+          onChange={({ target }) => {
+            setTitle(target.value);
+          }}
+        />
         <br />
-        author: <input type="text" />
+        author:
+        <input
+          type="text"
+          value={author}
+          onChange={({ target }) => {
+            setAuthor(target.value);
+          }}
+        />
         <br />
-        url: <input type="text" />
+        url:
+        <input
+          type="text"
+          value={url}
+          onChange={({ target }) => {
+            setUrl(target.value);
+          }}
+        />
         <br />
         <input type="submit" value="create" />
       </form>
