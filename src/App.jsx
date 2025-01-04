@@ -35,7 +35,7 @@ const App = () => {
           "loggedInBlogUser",
           JSON.stringify(response)
         );
-        setUser(response);
+        setUser(response.data);
         setUsername("");
         setPassword("");
         console.log("Logged in successfully");
