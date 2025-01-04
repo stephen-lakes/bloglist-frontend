@@ -22,18 +22,24 @@ const App = () => {
     }
   }, []);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async (event) => {
+    event.preventDefault();
 
     try {
-      const user = await loginService.login({ username, password });
-      window.localStorage.setItem("loggedInBlogUser", JSON.stringify(user));
+      const credentials = { username, password };
+      const result = await loginService.login(credentials);
 
-      setUser(user);
-      setUsername("");
-      setPassword("");
+      if (result.success !== false) {
+        window.localStorage.setItem("loggedInBlogUser", JSON.stringify(result));
+        setUser(result);
+        setUsername("");
+        setPassword("");
+        console.log("Logged in successfully");
+      } else {
+        console.error("Login failed:", result.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.error("An error occurred during login:", error);
     }
   };
 
