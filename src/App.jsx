@@ -12,11 +12,15 @@ const App = () => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+  };
+
   if (user === null) {
     return (
       <div>
         <h2>log in to the application</h2>
-        <form>
+        <form onSubmit={handleLogin}>
           Username:
           <input
             onChange={({ target }) => setUsername(target.value)}
