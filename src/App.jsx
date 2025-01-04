@@ -48,7 +48,7 @@ const App = () => {
       const credentials = { username, password };
       const response = await loginService.login(credentials);
 
-      if (response.success !== false) {
+      if (response.success) {
         window.localStorage.setItem(
           "loggedInBlogUser",
           JSON.stringify(response.data)
@@ -57,7 +57,13 @@ const App = () => {
         setUsername("");
         setPassword("");
         console.log("Logged in successfully", response.data);
-      } else handleError(response);
+        setSuccessMessage("Log in successful");
+        setTimeout(() => setSuccessMessage(null), 1000);
+      } else {
+        setErrorMessage("Invalid Username or Password");
+        setTimeout(() => setErrorMessage(null), 1000);
+      }
+      console.log("=>>> AFTER", response);
     } catch (error) {
       handleError(error);
     }
@@ -95,13 +101,15 @@ const App = () => {
     } catch (error) {
       handleError(error);
       setErrorMessage("Invalid Request, make sure all field are filled");
-      setTimeout(() => setErrorMessage(null), 10000);
+      setTimeout(() => setErrorMessage(null), 5000);
     }
   };
 
   if (user === null) {
     return (
       <div>
+        <Notification message={errorMessage} type="error" />
+        <Notification message={successMessage} type="success" />
         <h2>log in to the application</h2>
         <form onSubmit={handleLogin}>
           Username:
