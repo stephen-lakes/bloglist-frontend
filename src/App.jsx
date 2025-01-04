@@ -87,9 +87,15 @@ const App = () => {
         setAuthor("");
         setUrl("");
         console.log("Blog created successfully", response.data);
+        setSuccessMessage(
+          `A new blog by ${response.data.title} by ${user.name} added`
+        );
+        setTimeout(() => setSuccessMessage(null), 5000);
       } else handleError(response);
     } catch (error) {
       handleError(error);
+      setErrorMessage("Invalid Request, make sure all field are filled");
+      setTimeout(() => setErrorMessage(null), 10000);
     }
   };
 
@@ -121,7 +127,7 @@ const App = () => {
   return (
     <div>
       <Notification message={errorMessage} type="error" />
-      <Notification message="Added successfully" type="success" />
+      <Notification message={successMessage} type="success" />
 
       <h2>blogs</h2>
       <p>
