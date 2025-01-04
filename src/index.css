@@ -29,3 +29,27 @@ h2 {
   margin-bottom: 10px;
   border: 1px solid green;
 }
+
+.blog-container {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin: 8px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.blog-container:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.blog-title {
+  margin: 0 0 8px 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.blog-author {
+  margin: 0;
+  font-size: 1em;
+  color: #777;
+}
