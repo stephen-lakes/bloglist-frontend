@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken } from "../helpers/authUtils";
 const baseUrl = "/api/blogs";
 
 const getAll = () => {
@@ -8,6 +9,12 @@ const getAll = () => {
 
 const addNewBlog = async (payload) => {
   try {
+    const token = getToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const response = await axios.post(baseUrl, payload);
     return {
       success: true,
