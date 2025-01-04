@@ -1,9 +1,30 @@
-import axios from 'axios'
-const baseUrl = '/api/blogs'
+import axios from "axios";
+const baseUrl = "/api/blogs";
 
 const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
-}
+  const request = axios.get(baseUrl);
+  return request.then((response) => response.data);
+};
 
-export default { getAll }
+const addNewBlog = async (payload) => {
+  try {
+    const response = await axios.poat(baseUrl, payload);
+    return {
+      success: true,
+      data: response.data,
+      status: response.status,
+    };
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "An unknown error occured";
+    const stausCode = error.response?.status || 500;
+
+    throw {
+      success: false,
+      message: errorMessage,
+      status: stausCode,
+    };
+  }
+};
+
+export default { getAll, addNewBlog };
