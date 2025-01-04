@@ -15,7 +15,7 @@ const addNewBlog = async (payload) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await axios.post(baseUrl, payload);
+    const response = await axios.post(baseUrl, payload, config);
     return {
       success: true,
       data: response.data,
