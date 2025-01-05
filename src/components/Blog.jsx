@@ -13,7 +13,15 @@ export const BlogList = ({ blogs }) => (
   </>
 );
 
-export const AddNewBlogForm = ({ addBlog, title, author, url }) => {
+export const AddNewBlogForm = ({
+  addBlog,
+  title,
+  author,
+  url,
+  setTitle,
+  setAuthor,
+  setUrl,
+}) => {
   return (
     <div className="add-blog-form-container">
       <form onSubmit={addBlog} className="add-blog-form">
