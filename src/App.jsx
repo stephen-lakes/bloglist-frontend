@@ -127,7 +127,15 @@ const App = () => {
       <p>user id {user.id}</p>
 
       <h2>create new</h2>
-      <AddNewBlogForm addBlog={addBlog} />
+      <AddNewBlogForm
+        addBlog={addBlog}
+        title={title}
+        author={author}
+        url={url}
+        setTitle={setTitle}
+        setAuthor={setAuthor}
+        setUrl={setUrl}
+      />
       <BlogList blogs={blogs} />
 
       {/* {blogs.map((blog) => (
