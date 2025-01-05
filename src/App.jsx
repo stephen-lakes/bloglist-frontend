@@ -94,6 +94,7 @@ const App = () => {
         setAuthor("");
         setUrl("");
         console.log("Blog created successfully", response.data);
+        setBlogs(blogs.concat(returnedNote))
         setSuccessMessage(
           `A new blog by ${response.data.title} by ${user.name} added`
         );
