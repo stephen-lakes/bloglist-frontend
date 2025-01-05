@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Blog, { AddNewBlogForm } from "./components/Blog";
+import { AddNewBlogForm, BlogList } from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import handleError from "./helpers/error";
@@ -128,10 +128,11 @@ const App = () => {
 
       <h2>create new</h2>
       <AddNewBlogForm addBlog={addBlog} />
+      <BlogList blogs={blogs} />
 
-      {blogs.map((blog) => (
+      {/* {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
-      ))}
+      ))} */}
     </div>
   );
 };
