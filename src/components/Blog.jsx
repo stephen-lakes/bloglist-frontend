@@ -13,16 +13,14 @@ const Blog = ({ blog }) => {
     <div className="blog-container" style={blogStyle}>
       {/* <h2 className="blog-title">{blog.title}</h2>
       <p className="blog-author">author {blog.author}</p> */}
-      {blog.title} {blog.author}
-      <div>
-        <Togglable buttonLabel="view" closeButtonLabel="hide">
-          <div className="blog-details">
-            {blog.url} <br />
-            {blog.likes} <button>like</button> <br />
-            {blog.author}
-          </div>
-        </Togglable>
-      </div>
+      {blog.title}
+      <Togglable buttonLabel="view" closeButtonLabel="hide">
+        <div>
+          {blog.url} <br />
+          {blog.likes} <button>like</button> <br />
+          {blog.author}
+        </div>
+      </Togglable>
     </div>
   );
 };
