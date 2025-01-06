@@ -22,29 +22,12 @@ export const AddNewBlogForm = ({ createBlog }) => {
 
   const addBlog = async (event) => {
     event.preventDefault();
-    try {
-      const response = await blogService.addNewBlog({
-        title,
-        author,
-        url,
-        userId: user.id,
-      });
-      if (response.success !== false) {
-        setTitle("");
-        setAuthor("");
-        setUrl("");
-        console.log("Blog created successfully", response.data);
-        setBlogs(blogs.concat(returnedNote));
-        setSuccessMessage(
-          `A new blog by ${response.data.title} by ${user.name} added`
-        );
-        setTimeout(() => setSuccessMessage(null), 5000);
-      } else handleError(response);
-    } catch (error) {
-      handleError(error);
-      setErrorMessage("Invalid Request, make sure all field are filled");
-      setTimeout(() => setErrorMessage(null), 5000);
-    }
+    createBlog({
+      title,
+      author,
+      url,
+      userId: JSON.parse(window.localStorage.getItem("loggedInBlogUser")).id,
+    });
   };
 
   return (
