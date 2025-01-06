@@ -4,6 +4,7 @@ import blogService from "./services/blogs";
 import loginService from "./services/login";
 import handleError from "./helpers/error";
 import LoginForm from "./components/Login";
+import Togglable from "./components/Togglable";
 
 const Notification = ({ message, type }) => {
   if (message === null) {
@@ -110,13 +111,15 @@ const App = () => {
   };
 
   const renderLoginForm = () => (
-    <LoginForm
-      handleLogin={handleLogin}
-      password={password}
-      setPassword={setPassword}
-      username={username}
-      setUsername={setUsername}
-    />
+    <Togglable buttonLabel="login">
+      <LoginForm
+        handleLogin={handleLogin}
+        password={password}
+        setPassword={setPassword}
+        username={username}
+        setUsername={setUsername}
+      />
+    </Togglable>
   );
 
   const renderBlogForm = () => (
