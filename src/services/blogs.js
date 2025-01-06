@@ -37,7 +37,7 @@ const addNewBlog = async (payload) => {
   }
 };
 
-const updateBlog = async (blogId, payload) => {
+const updateBlogLike = async (blogId, payload) => {
   try {
     const token = getToken();
     const config = {
@@ -66,4 +66,4 @@ const updateBlog = async (blogId, payload) => {
   }
 };
 
-export default { getAll, addNewBlog };
+export default { getAll, addNewBlog, updateBlogLike };
