@@ -77,6 +77,8 @@ const App = () => {
       window.localStorage.removeItem(key);
       setUser(null);
       console.log("Logged out");
+      setSuccessMessage("Logged out successfully");
+      setTimeout(() => setSuccessMessage(null), 1000);
     }
   };
 
@@ -107,23 +109,18 @@ const App = () => {
     }
   };
 
-  if (user === null) {
-    return (
-      <LoginForm
-        handleLogin={handleLogin}
-        password={password}
-        setPassword={setPassword}
-        username={username}
-        setUsername={setUsername}
-      />
-    );
-  }
+  const renderLoginForm = () => (
+    <LoginForm
+      handleLogin={handleLogin}
+      password={password}
+      setPassword={setPassword}
+      username={username}
+      setUsername={setUsername}
+    />
+  );
 
-  return (
+  const renderBlogForm = () => (
     <div>
-      <Notification message={successMessage} type="success" />
-      <Notification message={errorMessage} type="error" />
-      <h2>blogs</h2>
       <p>
         {user.name} logged in <button onClick={handleLogout}>logout</button>
       </p>
@@ -140,6 +137,16 @@ const App = () => {
         setUrl={setUrl}
       />
       <BlogList blogs={blogs} />
+    </div>
+  );
+
+  return (
+    <div>
+      <Notification message={successMessage} type="success" />
+      <Notification message={errorMessage} type="error" />
+      <h2>blogs</h2>
+
+      {user === null ? renderLoginForm() : renderBlogForm()}
     </div>
   );
 };
