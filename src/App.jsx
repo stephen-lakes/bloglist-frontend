@@ -97,7 +97,7 @@ const App = () => {
       const response = await blogService.addNewBlog(blogObj);
       if (response.success !== false) {
         console.log("Blog created successfully", response.data);
-        setBlogs(blogs.concat(returnedNote));
+        setBlogs(blogs.concat(response.data));
         setSuccessMessage(
           `A new blog by ${response.data.title} by ${user.name} added`
         );
