@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function LoginForm({
   handleLogin,
   setUsername,
@@ -38,3 +40,11 @@ function LoginForm({
 }
 
 export default LoginForm;
+
+LoginForm.prototype = {
+  handleLogin: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+};
