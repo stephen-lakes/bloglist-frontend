@@ -119,13 +119,15 @@ const App = () => {
     }
   };
 
-  const deleteBlog = async (blogId) => {
-    try {
-      const response = await blogService.deleteBlog(blogId);
-      if (response.success) console.log("Blog deleted");
-    } catch (error) {
-      handleError(error);
-    }
+  const deleteBlog = async (blog) => {
+    const confirmDelete = window.confirm(`Remove blog`);
+    if (confirmDelete)
+      try {
+        const response = await blogService.deleteBlog(blog.id);
+        if (response.success) console.log(`Blog deleted`);
+      } catch (error) {
+        handleError(error);
+      }
   };
 
   const blogFormRef = useRef();
