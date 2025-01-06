@@ -119,6 +119,15 @@ const App = () => {
     }
   };
 
+  const deleteBlog = async (blogId) => {
+    try {
+      const response = await blogService.deleteBlog(blogId);
+      if (response.success) console.log("Blog deleted");
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   const blogFormRef = useRef();
 
   const renderBlogForm = () => (
@@ -132,7 +141,11 @@ const App = () => {
         <h2>create new</h2>
         <AddNewBlogForm createBlog={addBlog} />
       </Togglable>
-      <BlogList blogs={blogs} updateBlogLike={updateBlogLike} />
+      <BlogList
+        blogs={blogs}
+        updateBlogLike={updateBlogLike}
+        deleteBlog={deleteBlog}
+      />
     </div>
   );
 
