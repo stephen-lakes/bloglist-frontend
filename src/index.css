@@ -7,10 +7,10 @@ img {
   max-width: 100%;
   height: auto;
 }
-h2 {
+/* h2 {
   color: green;
   font-style: italic;
-}
+} */
 
 .error {
   color: red;
@@ -31,20 +31,20 @@ h2 {
   border: 1px solid green;
 }
 
-.blog-container {
+/* .blog-container {
   border: 1px solid #ddd;
   padding: 16px;
   margin: 8px 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   width: 320px;
-}
+} */
 
-.blog-container:hover {
+/* .blog-container:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
+} */
 
-.blog-title {
+/* .blog-title {
   margin: 0 0 8px 0;
   font-size: 1.5em;
   color: #333;
@@ -54,7 +54,7 @@ h2 {
   margin: 0;
   font-size: 1em;
   color: #777;
-}
+} */
 
 .login-form-container {
   display: flex;
