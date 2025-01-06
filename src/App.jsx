@@ -129,16 +129,18 @@ const App = () => {
       </p>
       <p>user id {user.id}</p>
 
-      <h2>create new</h2>
-      <AddNewBlogForm
-        addBlog={addBlog}
-        title={title}
-        author={author}
-        url={url}
-        setTitle={setTitle}
-        setAuthor={setAuthor}
-        setUrl={setUrl}
-      />
+      <Togglable buttonLabel="Add Blog">
+        <h2>create new</h2>
+        <AddNewBlogForm
+          addBlog={addBlog}
+          title={title}
+          author={author}
+          url={url}
+          setTitle={setTitle}
+          setAuthor={setAuthor}
+          setUrl={setUrl}
+        />
+      </Togglable>
       <BlogList blogs={blogs} />
     </div>
   );
