@@ -129,7 +129,7 @@ const App = () => {
       </p>
       <p>user id {user.id}</p>
 
-      <Togglable buttonLabel="Add Blog">
+      <Togglable buttonLabel="new blog">
         <h2>create new</h2>
         <AddNewBlogForm
           addBlog={addBlog}
