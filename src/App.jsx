@@ -120,7 +120,9 @@ const App = () => {
   };
 
   const deleteBlog = async (blog) => {
-    const confirmDelete = window.confirm(`Remove blog`);
+    const confirmDelete = window.confirm(
+      `Remove blog ${blog.title} by ${blog.author}`
+    );
     if (confirmDelete)
       try {
         const response = await blogService.deleteBlog(blog.id);
