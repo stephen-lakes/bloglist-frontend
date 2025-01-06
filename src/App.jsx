@@ -110,11 +110,14 @@ const App = () => {
     }
   };
 
-  const updateBlogLike = async (blogId, blogObj)=> {
-    const response = await blogService.updateBlogLike(blogObj)
-    
-
-  }
+  const updateBlogLike = async (blogId, blogObj) => {
+    try {
+      const response = await blogService.updateBlogLike(blogId, blogObj);
+      if (response.success) console.log("Like updated");
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   const blogFormRef = useRef();
 
@@ -129,7 +132,7 @@ const App = () => {
         <h2>create new</h2>
         <AddNewBlogForm createBlog={addBlog} />
       </Togglable>
-      <BlogList blogs={blogs} />
+      <BlogList blogs={blogs} updateBlogLike={updateBlogLike} />
     </div>
   );
 
