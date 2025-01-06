@@ -16,8 +16,9 @@ const Blog = ({ blog }) => {
       {blog.title}
       <Togglable buttonLabel="view" closeButtonLabel="hide">
         <div>
-          {blog.url} <br />
-          {blog.likes} <button>like</button> <br />
+          <a href={blog.url}>{blog.url}</a>
+          <br />
+          likes {blog.likes} <button>like</button> <br />
           {blog.author}
         </div>
       </Togglable>
