@@ -94,7 +94,7 @@ const App = () => {
         setAuthor("");
         setUrl("");
         console.log("Blog created successfully", response.data);
-        setBlogs(blogs.concat(returnedNote))
+        setBlogs(blogs.concat(returnedNote));
         setSuccessMessage(
           `A new blog by ${response.data.title} by ${user.name} added`
         );
@@ -121,6 +121,8 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={successMessage} type="success" />
+      <Notification message={errorMessage} type="error" />
       <h2>blogs</h2>
       <p>
         {user.name} logged in <button onClick={handleLogout}>logout</button>
@@ -138,10 +140,6 @@ const App = () => {
         setUrl={setUrl}
       />
       <BlogList blogs={blogs} />
-
-      {/* {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
-      ))} */}
     </div>
   );
 };
