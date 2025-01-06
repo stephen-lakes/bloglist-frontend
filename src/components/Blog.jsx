@@ -2,7 +2,7 @@ import { useState } from "react";
 import Togglable from "./Togglable";
 import { getUser } from "../helpers/authUtils";
 
-const Blog = ({ blog, updateBlogLike }) => {
+const Blog = ({ blog, updateBlogLike, deleteBlog }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -22,29 +22,36 @@ const Blog = ({ blog, updateBlogLike }) => {
           likes {blog.likes}
           <button
             onClick={() =>
-              updateBlogLike(blog.id, { ...blog, user: getUser().id,  likes: blog.likes + 1 })
+              updateBlogLike(blog.id, {
+                ...blog,
+                user: getUser().id,
+                likes: blog.likes + 1,
+              })
             }
           >
             like
           </button>
           <br />
           {blog.author} <br />
-          <button onClick={() => console.log("REOMOVE CLICKED=>>>")}>
-            remove
-          </button>
+          <button onClick={() => deleteBlog(blog.id)}>remove</button>
         </div>
       </Togglable>
     </div>
   );
 };
 
-export const BlogList = ({ blogs, updateBlogLike }) => {
+export const BlogList = ({ blogs, updateBlogLike, deleteBlog }) => {
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
 
   return (
     <>
       {sortedBlogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} updateBlogLike={updateBlogLike} />
+        <Blog
+          key={blog.id}
+          blog={blog}
+          updateBlogLike={updateBlogLike}
+          deleteBlog={deleteBlog}
+        />
       ))}
     </>
   );
