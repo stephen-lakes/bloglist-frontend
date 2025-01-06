@@ -1,7 +1,5 @@
 const Notification = ({ message, type }) => {
-  if (message === null) {
-    return null;
-  }
+  if (message === null) return null;
   return (
     <>
       <div className={`${type === "success" ? "success" : "error"}`}>
@@ -9,6 +7,11 @@ const Notification = ({ message, type }) => {
       </div>
     </>
   );
+};
+
+Notification.prototype = {
+  message: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Notification;
