@@ -110,6 +110,12 @@ const App = () => {
     }
   };
 
+  const updateBlogLike = async (blogId, blogObj)=> {
+    const response = await blogService.updateBlogLike(blogObj)
+    
+
+  }
+
   const blogFormRef = useRef();
 
   const renderBlogForm = () => (
