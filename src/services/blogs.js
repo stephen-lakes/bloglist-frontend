@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getToken } from "../helpers/authUtils";
+import handleError from "../helpers/error";
 const baseUrl = "/api/blogs";
 
 const getAll = async () => {
@@ -34,6 +35,26 @@ const addNewBlog = async (payload) => {
       message: errorMessage,
       status: stausCode,
     };
+  }
+};
+
+const deleteBlog = async () => {
+  try {
+    const token = getToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    console.log("BEFORE =>>>");
+    const response = await axios.delete(baseUrl + `/${blogId}`, config);
+    console.log("AFTER =>>>", response);
+    return {
+      success: true,
+      status: response.status,
+    };
+  } catch (error) {
+    handleError(error);
   }
 };
 
