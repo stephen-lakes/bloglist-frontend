@@ -1,11 +1,23 @@
 import { useState } from "react";
 
-const Blog = ({ blog }) => (
-  <div className="blog-container">
-    <h2 className="blog-title">{blog.title}</h2>
-    <p className="blog-author">author {blog.author}</p>
-  </div>
-);
+const Blog = ({ blog }) => {
+  const blogStyle = {
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: "solid",
+    borderWidth: 1,
+    marginBottom: 5,
+  };
+  return (
+    <div className="blog-container" style={blogStyle}>
+      {/* <h2 className="blog-title">{blog.title}</h2>
+      <p className="blog-author">author {blog.author}</p> */}
+      <div>
+        {blog.title} {blog.author} <button>view</button>
+      </div>
+    </div>
+  );
+};
 
 export const BlogList = ({ blogs }) => (
   <>
@@ -29,9 +41,9 @@ export const AddNewBlogForm = ({ createBlog }) => {
       userId: JSON.parse(window.localStorage.getItem("loggedInBlogUser")).id,
     });
 
-    setAuthor("")
-    setTitle("")
-    setUrl("")
+    setAuthor("");
+    setTitle("");
+    setUrl("");
   };
 
   return (
