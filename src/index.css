@@ -1,7 +1,7 @@
 * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 img {
   max-width: 100%;
@@ -60,7 +60,6 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
 }
 
 .login-form {
@@ -151,7 +150,7 @@ h2 {
 }
 
 .form-input:focus {
-  border-color: #007BFF;
+  border-color: #007bff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
@@ -161,7 +160,7 @@ h2 {
   padding: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   font-size: 1em;
   cursor: pointer;
@@ -171,4 +170,3 @@ h2 {
 .form-submit:hover {
   background-color: #0056b3;
 }
-
