@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Togglable from "./Togglable";
 
 const Blog = ({ blog }) => {
   const blogStyle = {
@@ -12,8 +13,15 @@ const Blog = ({ blog }) => {
     <div className="blog-container" style={blogStyle}>
       {/* <h2 className="blog-title">{blog.title}</h2>
       <p className="blog-author">author {blog.author}</p> */}
+      {blog.title} {blog.author}
       <div>
-        {blog.title} {blog.author} <button>view</button>
+        <Togglable buttonLabel="view" closeButtonLabel="hide">
+          <div className="blog-details">
+            {blog.url} <br />
+            {blog.likes} <button>like</button> <br />
+            {blog.author}
+          </div>
+        </Togglable>
       </div>
     </div>
   );
