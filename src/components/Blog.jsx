@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Blog = ({ blog }) => (
   <div className="blog-container">
     <h2 className="blog-title">{blog.title}</h2>
@@ -13,15 +15,38 @@ export const BlogList = ({ blogs }) => (
   </>
 );
 
-export const AddNewBlogForm = ({
-  addBlog,
-  title,
-  author,
-  url,
-  setTitle,
-  setAuthor,
-  setUrl,
-}) => {
+export const AddNewBlogForm = ({ createBlog }) => {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [url, setUrl] = useState("");
+
+  const addBlog = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await blogService.addNewBlog({
+        title,
+        author,
+        url,
+        userId: user.id,
+      });
+      if (response.success !== false) {
+        setTitle("");
+        setAuthor("");
+        setUrl("");
+        console.log("Blog created successfully", response.data);
+        setBlogs(blogs.concat(returnedNote));
+        setSuccessMessage(
+          `A new blog by ${response.data.title} by ${user.name} added`
+        );
+        setTimeout(() => setSuccessMessage(null), 5000);
+      } else handleError(response);
+    } catch (error) {
+      handleError(error);
+      setErrorMessage("Invalid Request, make sure all field are filled");
+      setTimeout(() => setErrorMessage(null), 5000);
+    }
+  };
+
   return (
     <div className="add-blog-form-container">
       <form onSubmit={addBlog} className="add-blog-form">
