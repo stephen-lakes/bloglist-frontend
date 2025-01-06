@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AddNewBlogForm, BlogList } from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
@@ -24,9 +24,6 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [author, setAuthor] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
@@ -83,19 +80,22 @@ const App = () => {
     }
   };
 
-  const addBlog = async (event) => {
-    event.preventDefault();
+  const renderLoginForm = () => (
+    <Togglable buttonLabel="login">
+      <LoginForm
+        handleLogin={handleLogin}
+        password={password}
+        setPassword={setPassword}
+        username={username}
+        setUsername={setUsername}
+      />
+    </Togglable>
+  );
+
+  const addBlog = async (blogObj) => {
     try {
-      const response = await blogService.addNewBlog({
-        title,
-        author,
-        url,
-        userId: user.id,
-      });
+      const response = await blogService.addNewBlog(blogObj);
       if (response.success !== false) {
-        setTitle("");
-        setAuthor("");
-        setUrl("");
         console.log("Blog created successfully", response.data);
         setBlogs(blogs.concat(returnedNote));
         setSuccessMessage(
@@ -110,17 +110,7 @@ const App = () => {
     }
   };
 
-  const renderLoginForm = () => (
-    <Togglable buttonLabel="login">
-      <LoginForm
-        handleLogin={handleLogin}
-        password={password}
-        setPassword={setPassword}
-        username={username}
-        setUsername={setUsername}
-      />
-    </Togglable>
-  );
+  const blogFormRef = useRef();
 
   const renderBlogForm = () => (
     <div>
@@ -129,17 +119,9 @@ const App = () => {
       </p>
       <p>user id {user.id}</p>
 
-      <Togglable buttonLabel="new blog">
+      <Togglable buttonLabel="new blog" ref={blogFormRef}>
         <h2>create new</h2>
-        <AddNewBlogForm
-          addBlog={addBlog}
-          title={title}
-          author={author}
-          url={url}
-          setTitle={setTitle}
-          setAuthor={setAuthor}
-          setUrl={setUrl}
-        />
+        <AddNewBlogForm createBlog={addBlog} />
       </Togglable>
       <BlogList blogs={blogs} />
     </div>
