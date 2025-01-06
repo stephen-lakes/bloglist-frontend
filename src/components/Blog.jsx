@@ -28,6 +28,10 @@ export const AddNewBlogForm = ({ createBlog }) => {
       url,
       userId: JSON.parse(window.localStorage.getItem("loggedInBlogUser")).id,
     });
+
+    setAuthor("")
+    setTitle("")
+    setUrl("")
   };
 
   return (
