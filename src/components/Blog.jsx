@@ -26,13 +26,17 @@ const Blog = ({ blog }) => {
   );
 };
 
-export const BlogList = ({ blogs }) => (
-  <>
-    {blogs.map((blog) => (
-      <Blog key={blog.id} blog={blog} />
-    ))}
-  </>
-);
+export const BlogList = ({ blogs }) => {
+  const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
+
+  return (
+    <>
+      {sortedBlogs.map((blog) => (
+        <Blog key={blog.id} blog={blog} />
+      ))}
+    </>
+  );
+};
 
 export const AddNewBlogForm = ({ createBlog }) => {
   const [title, setTitle] = useState("");
