@@ -1,4 +1,6 @@
-const Togglable = () => {
+import { useState } from "react";
+
+const Togglable = (props) => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = (props) => {
