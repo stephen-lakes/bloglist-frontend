@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { AddNewBlogForm, BlogList } from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import handleError from "./helpers/error";
 import LoginForm from "./components/Login";
 import Togglable from "./components/Togglable";
+import AddNewBlogForm from "./components/AddBlogForm";
+import BlogList from "./components/BlogList";
 
 const Notification = ({ message, type }) => {
   if (message === null) {
