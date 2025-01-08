@@ -11,7 +11,6 @@ const AddNewBlogForm = ({ createBlog }) => {
       title,
       author,
       url,
-      userId: JSON.parse(window.localStorage.getItem("loggedInBlogUser")).id,
     });
 
     setAuthor("");
