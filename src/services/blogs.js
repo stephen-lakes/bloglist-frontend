@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "../helpers/authUtils";
+import { getToken, getUser } from "../helpers/authUtils";
 import handleError from "../helpers/error";
 const baseUrl = "/api/blogs";
 
@@ -18,7 +18,14 @@ const addNewBlog = async (payload) => {
       },
     };
     console.log("BEFORE =>>>");
-    const response = await axios.post(baseUrl, payload, config);
+    const response = await axios.post(
+      baseUrl,
+      {
+        ...payload,
+        userId: getUser().id,
+      },
+      config
+    );
     console.log("AFTER =>>>");
     return {
       success: true,
