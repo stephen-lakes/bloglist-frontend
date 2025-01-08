@@ -32,10 +32,10 @@ const Blog = ({ blog, updateBlogLike, deleteBlog }) => {
             like
           </button>
           <br />
-          {blog.author} <br />
           <button onClick={() => deleteBlog(blog)}>remove</button>
         </div>
       </Togglable>
+      {blog.author} <br />
     </div>
   );
 };
