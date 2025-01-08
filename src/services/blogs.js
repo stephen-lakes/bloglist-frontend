@@ -74,7 +74,11 @@ const updateBlogLike = async (blogId, payload) => {
       },
     };
     console.log("BEFORE =>>>");
-    const response = await axios.put(baseUrl + `/${blogId}`, payload, config);
+    const response = await axios.put(
+      baseUrl + `/${blogId}`,
+      { ...payload, user: getUser().id },
+      config
+    );
     console.log("AFTER =>>>");
     return {
       success: true,
