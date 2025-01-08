@@ -39,3 +39,34 @@ test("shows URL and number of likes when the view button is clicked", async () =
 
   expect(urlAndLikesContainer).toHaveStyle(`display: block`);
 });
+
+test("calls updateBlogLike handler twice when the like button is clicked twice", async () => {
+  const updateBlogMockHandler = vi.fn();
+
+  const blog = {
+    title: `My Backend Projects Showcase`,
+    author: `Stephen Oluyomi`,
+    url: `https://stephen-dev-frontend.onrender.com/projects`,
+    likes: `200000003`,
+  };
+  render(
+    <Blog
+      blog={blog}
+      updateBlogLike={updateBlogMockHandler}
+      deleteBlog={() => {}}
+    />
+  );
+
+  const user = userEvent.setup();
+
+  const viewButton = screen.getByText("view");
+  await user.click(viewButton);
+
+  const likeButton = screen.getByText("like");
+
+  // Simulate two clicks on the "like" button
+  await user.click(likeButton);
+  await user.click(likeButton);
+
+  expect(updateBlogMockHandler.mock.calls).toHaveLength(2);
+});
