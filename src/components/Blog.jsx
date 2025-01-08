@@ -14,12 +14,14 @@ const Blog = ({ blog, updateBlogLike, deleteBlog }) => {
     <div className="blog-container" style={blogStyle}>
       {/* <h2 className="blog-title">{blog.title}</h2>
       <p className="blog-author">author {blog.author}</p> */}
-      {blog.title}
+      <p id="blog-title">{blog.title}</p>
       <Togglable buttonLabel="view" closeButtonLabel="hide">
         <div>
-          <a href={blog.url}>{blog.url}</a>
+          <a href={blog.url} id="blog-url">
+            {blog.url}
+          </a>
           <br />
-          likes {blog.likes}
+          likes <span id="blog-likes">{blog.likes}</span>
           <button
             onClick={() =>
               updateBlogLike(blog.id, {
@@ -35,7 +37,8 @@ const Blog = ({ blog, updateBlogLike, deleteBlog }) => {
           <button onClick={() => deleteBlog(blog)}>remove</button>
         </div>
       </Togglable>
-      {blog.author} <br />
+      {/* {blog.author} <br /> */}
+      <p id="blog-author">{blog.author}</p>
     </div>
   );
 };
