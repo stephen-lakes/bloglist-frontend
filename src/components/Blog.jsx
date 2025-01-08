@@ -26,7 +26,6 @@ const Blog = ({ blog, updateBlogLike, deleteBlog }) => {
             onClick={() =>
               updateBlogLike(blog.id, {
                 ...blog,
-                user: getUser().id,
                 likes: blog.likes + 1,
               })
             }
