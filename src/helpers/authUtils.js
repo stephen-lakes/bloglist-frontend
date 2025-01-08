@@ -4,5 +4,7 @@ export const getToken = () => {
 };
 
 export const getUser = () => {
-  return JSON.parse(window.localStorage.getItem("loggedInBlogUser")) || null;
+  const user =
+    JSON.parse(window.localStorage.getItem("loggedInBlogUser")) || null;
+  return user || null;
 };
